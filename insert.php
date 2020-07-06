@@ -1,28 +1,44 @@
 <?php
 
-// echo $_POST['name1'];
-// echo $_POST['address1'];
 include('dbconnect.php');
-// $name = $_POST['name'];
-
-// $address = $_POST['address'];
-
-// $sql = "INSERT INTO info (name, address)
-// VALUES ('$name', '$address')";
-
-// if ($db->query($sql) === TRUE) {
-//   echo "New record created successfully";
-// } else {
-//   echo "Error: " . $sql . "<br>" . $conn->error;
-// }
-
-
 
 if ( isset( $_POST['save'] ) ) {   // check if button is click
     $name = $_POST['name'];
     $address = $_POST['address'];
+    $image_name ="";
+    if(isset($_FILES['image'])){
+        $errors= array(); //
+        $file_name = $_FILES['image']['name'];
+        $file_size =$_FILES['image']['size'];
+        $file_tmp =$_FILES['image']['tmp_name'];
+        $file_type=$_FILES['image']['type'];
+        
+        
+        $extensions= array("jpeg","jpg","png"); //
+        $tmp = explode('.', $file_name);
+        $file_ext = end($tmp);
 
-    mysqli_query( $db, "INSERT INTO info (name, address) VALUES ('$name', '$address')" );  // insert to database
+        if(in_array($file_ext,$extensions)=== false){
+           $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+           
+        }
+        
+        if($file_size > 2097152){
+           $errors[]='File size must be excately 2 MB';
+        }
+        
+        if(empty($errors)==true){
+           move_uploaded_file($file_tmp,"images/".$file_name); // this function upload the file
+           $image_name = $file_name;
+           echo "Success".$file_name;
+        }else{
+           print_r($errors);
+        }
+     }
+
+
+
+    mysqli_query( $db, "INSERT INTO info (name, address,image) VALUES ('$name', '$address','$image_name')" );  // insert to database
 
     $_SESSION['message'] = 'Address saved'; // session ko kaam message dine
     

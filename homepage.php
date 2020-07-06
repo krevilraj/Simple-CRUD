@@ -23,6 +23,7 @@ include('dbconnect.php');
 <table>
 	<thead>
 		<tr>
+		<th>Image</th>
 			<th>Name</th>
 			<th>Address</th>
 			<th colspan="2">Action</th>
@@ -31,6 +32,7 @@ include('dbconnect.php');
 	
 	<?php while ($row = mysqli_fetch_array($results)) { ?>
 		<tr>
+			<td><img src="images/<?php echo $row['image']; ?>" width="50" /></td>
 			<td><?php echo $row['name']; ?></td>
 			<td><?php echo $row['address']; ?></td>
 			<td>

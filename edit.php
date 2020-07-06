@@ -9,6 +9,7 @@ include('dbconnect.php');  // connection database
 			$n = mysqli_fetch_array($record);
 			$name = $n['name'];
 			$address = $n['address'];
+			$image = $n['image'];
 		}
 
     }
@@ -28,10 +29,14 @@ include('dbconnect.php');  // connection database
 			?>
 		</div>
 	<?php endif ?>
-<form method="post" action="update.php" >
+<form method="post" action="update.php" enctype="multipart/form-data">
 
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
-
+	<div class="input-group">
+		<label>Image</label>
+		<img src="images/<?php echo $image; ?>" width="200">
+		<input type='file' name='image' />
+	</div>
 	<div class="input-group">
 		<label>Name</label>
 		<input type="text" name="name" value="<?php echo $name; ?>">
