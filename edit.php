@@ -1,8 +1,9 @@
 <?php 
-include('dbconnect.php');
+include('dbconnect.php');  // connection database
 	if (isset($_GET['edit'])) {
+
 		$id = $_GET['edit'];
-		$update = true;
+	 $update = true;
 		$record = mysqli_query($db, "SELECT * FROM info WHERE id=$id");
 		if ( mysqli_num_rows($record) == 1 ) {
 			$n = mysqli_fetch_array($record);

@@ -1,11 +1,6 @@
 <?php 
 // connecting to the database
-
 include('dbconnect.php');
-
-if(!isset($_SESSION['user_login'])){
-	 header('Refresh: 1; URL=login.php'); // redirect to add.php
-}
 // initialize variables
 ?>
 
@@ -27,22 +22,22 @@ if(!isset($_SESSION['user_login'])){
     </div>
     <?php endif ?>
 	
-    <form method="post" action="insert.php">
+    <form method="post" action="authenticate.php">
 
         
 
         <div class="input-group">
-            <label>Name</label>
-            <input type="text" name="name" id="name1">
+            <label>Email</label>
+            <input type="email" name="email" id="name1">
         </div>
         <div class="input-group">
-            <label>Address</label>
-            <input type="text" name="address" id="address1">
+            <label>Password</label>
+            <input type="password" name="password" id="address1">
         </div>
         <div class="input-group">
 
 
-            <button class="btn" type="submit" name="save">Save</button>
+            <button class="btn" type="submit" name="save">Login</button>
 
         </div>
     </form>
